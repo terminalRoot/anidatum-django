@@ -1,0 +1,10 @@
+{% if imgs %}
+	{% for img in imgs %}
+		<a href="{% url 'annotator:details' img.id %}">
+			<img src="{{img.source}}" height="240px">
+		</a>
+	{% endfor %}
+
+{% else %}
+	<h3>Add images</h3>>
+{% endif %}

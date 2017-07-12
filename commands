@@ -1,0 +1,35 @@
+Run server:
+	python manage.py runserver
+
+Create new applicaton:
+	python manage.py startapp <<app_name>>
+
+Migrate DB:
+	python manage.py migrate
+
+Create DB:
+	python manage.py makemigrations <<app_name>>
+
+##check sql:
+	python manage.py sqlmigrate <<app_name>> <<migration_no>>
+	e.g: python manange.py sqlmigrate music 001
+	python manage.py migrate
+
+
+#add application to settings.py
+	e.g:
+	INSTALLED_APPS : [
+		'music.app.MusicConfig',
+		...
+	]
+
+
+Start python DB shell:
+	python manage.py shell
+
+
+Create admin:
+	python manage.py createsuperuser
+	username:
+	Email:
+	password:
