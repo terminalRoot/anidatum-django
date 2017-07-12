@@ -1,3 +1,45 @@
+<!-- loads static file path -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy" />
+<link rel="stylesheet" type="text/css" href="{% static 'image/style.css' %}" />
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+
+		<!-- header -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="{% url 'annotator:index' %}">anidatum</a>
+		</div>
+
+		<!-- Items -->
+		<div>
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="{% url 'annotator:index' %}">
+						<span class="glyphicon-picture" aria-hidden="true"></span>&nbsp; Images
+					</a>
+				</li>
+				
+				<li class="">
+					<a href="#">
+						<span class="glyphicon-music" aria-hidden="true"></span>&nbsp; Songs
+					</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</nav>
+
 {% if imgs %}
 	{% for img in imgs %}
 		<a href="{% url 'annotator:details' img.id %}">
