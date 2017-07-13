@@ -1,30 +1,35 @@
-{% if img %}
-	<div>
-		<label>Image: {{ img.id }}</label> <br/>
-		<img src="{{img.source}}" height="720px">
-		<ul>
-			{% for label in img.label_set.all %}
-				<li>{{ label.attribute.cat }} - {{ label.attribute.value }}</li>
-			{% endfor %}
-		</ul>
-	</div>
-{% else %}
-	<label>Invalid image id</label>
-{% endif %}
+{% extends 'image/base.html' %}
+{% block title %}Label{% endblock%}
+
+{% block body %}
+	{% if img %}
+		<div>
+			<label>Image: {{ img.id }}</label> <br/>
+			<img src="{{img.source}}" height="720px">
+			<ul>
+				{% for label in img.label_set.all %}
+					<li>{{ label.attribute.cat }} - {{ label.attribute.value }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% else %}
+		<label>Invalid image id</label>
+	{% endif %}
 
 
-{% if err_msg %}
-	<p><strong>{{ err_msg }}</strong></p>
-{% endif %}
+	{% if err_msg %}
+		<p><strong>{{ err_msg }}</strong></p>
+	{% endif %}
 
 
-<form action="{% url 'annotator:label' img.id %}" method="post">
-	{% csrf_token %}
-	{% for label in img.label_set.all %}
-		<input type="radio" id="{{ forloop.counter }}" name="label" value="{{label.id}}">
-		<label for="label{{forloop.counter}}">
-			{{label.attribute.cat.name}}
-		</label>
-	{% endfor %}
-	<input type="submit" name="" value="Save">
-</form>
+	<form action="{% url 'annotator:label' img.id %}" method="post">
+		{% csrf_token %}
+		{% for label in img.label_set.all %}
+			<input type="radio" id="{{ forloop.counter }}" name="label" value="{{label.id}}">
+			<label for="label{{forloop.counter}}">
+				{{label.attribute.cat.name}}
+			</label>
+		{% endfor %}
+		<input type="submit" name="" value="Save">
+	</form>
+{% endblock %}
