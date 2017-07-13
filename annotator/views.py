@@ -1,28 +1,21 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Image, Label
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views import generic
+from .models import Image
 
 
-def index(request):
-	imgs = Image.objects.all()
-	context={'imgs' : imgs}
-	return render(request, 'image/index.html', context)
+class IndexView(generic.ListView):
+	template_name = 'image/index.html'
+	context_object_name = 'imgs'
 
-def details(request, img_id):
-	img = get_object_or_404(Image, id=img_id)	
-	return render(request, 'image/details.html', {'img' : img})
+	def get_queryset(self):
+		return Image.objects.all()
 
-def label(request, img_id):
-	img = get_object_or_404(Image, id=img_id)
-	try:
-		print(request.POST['label'])
-		label = img.label_set.get(id=request.POST['label'])
-	except (KeyError, Label.DoesNotExist):
-		return render(request, 'image/details.html', {
-			'img' : img,
-			'err_msg' : 'Invalid input'
-			})
-	else:
-		##update label
-		#label.<<field>> = value
-		#label.save()
-		return render(request, 'image/details.html', {'img':img})
+class DetailView(generic.DetailView):
+	model = Image
+	template_name = 'image/details.html'
+	context_object_name = 'img'
+
+class ImageCreate(CreateView):
+	model = Image
+	fields = ['source']
+	template_name = 'image/image_form.html'
