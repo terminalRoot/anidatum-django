@@ -8,10 +8,12 @@
 				{% for img in imgs %}
 					<div class="col-sm-4 col-md-3 col-lg-2 img-container">
 						<a href="{% url 'annotator:details' img.id %}">
+							{% load thumbnail %}
 							{% if img.source %}
-								<img src="{{img.source}}" height="240px">
+								<!-- <img src="{% thumbnail img.source 200x100 %}" height="" alt=""/> -->
+								<img src="{{img.source}}" height="240px" alt=""/>
 							{% else %}
-								<img src="{{img.file.url}}" height="240px">
+								<img src="{{img.file.url}}" height="240px" alt="" />
 							{% endif %}
 						</a>
 						<!-- annotations -->
@@ -43,3 +45,5 @@
 		</div>
 	</div>
 {% endblock %}
+
+<!-- <img src=" thumbnail img.source 50x50 " height="240px" alt="" /> -->

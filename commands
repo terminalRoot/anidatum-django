@@ -43,3 +43,6 @@ Install django rest framework
 		'rest_framework',
 		'annotator.apps.AnnotatorConfig'
 	]
+
+Install easy_thumbnails:
+	sudo pip install easy-thumbnails
