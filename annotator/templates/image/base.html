@@ -23,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="{% url 'annotator:index' %}">anidatum</a>
+				<a href="{% url 'annotator:index' %}" class="navbar-brand">anidatum</a>
 			</div>
 
 			<!-- Items -->
@@ -31,15 +31,22 @@
 				<ul class="nav navbar-nav">
 					<li class="active">
 						<a href="{% url 'annotator:index' %}">
-							<span class="glyphicon-picture" aria-hidden="true"></span>&nbsp; Images
+							<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>&nbsp; Images
 						</a>
 					</li>
 					
 					<li class="">
 						<a href="#">
-							<span class="glyphicon-music" aria-hidden="true"></span>&nbsp; Songs
+							<span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp; Songs
 						</a>
 					</li>
+
+					<li class="">
+						<a href="#">
+							<span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Camera
+						</a>
+					</li>
+
 				</ul>
 
 				<form class="navbar-form navbar-left" role="search" method="get" action="#">

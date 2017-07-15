@@ -33,3 +33,13 @@ Create admin:
 	username:
 	Email:
 	password:
+
+Install django rest framework
+	sudo pip install djangorestframework
+
+	#add rest framework to settings:
+	INSTALLED_APPS:[
+		...,
+		'rest_framework',
+		'annotator.apps.AnnotatorConfig'
+	]

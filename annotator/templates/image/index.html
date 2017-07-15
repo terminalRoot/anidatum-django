@@ -1,14 +1,45 @@
 {% extends 'image/base.html' %}
 
-{% block body %}
-	{% if imgs %}
-		{% for img in imgs %}
-			<a href="{% url 'annotator:details' img.id %}">
-				<img src="{{img.source}}" height="240px">
-			</a>
-		{% endfor %}
 
-	{% else %}
-		<h3>Add images</h3>>
-	{% endif %}
+{% block body %}
+	<div class="container-fluid ">
+		<div class="row">
+			{% if imgs %}
+				{% for img in imgs %}
+					<div class="col-sm-4 col-md-3 col-lg-2 img-container">
+						<a href="{% url 'annotator:details' img.id %}">
+							{% if img.source %}
+								<img src="{{img.source}}" height="240px">
+							{% else %}
+								<img src="{{img.file.url}}" height="240px">
+							{% endif %}
+						</a>
+						<!-- annotations -->
+						<div>
+							{% for label in img.label_set.all %}
+								<label style="color: white;">{{label.attribute.cat}}</label>
+							{% endfor %}
+						</div>
+						<!-- Edit image source -->
+						<a href="{% url 'annotator:image-update' img.id%}">
+							<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+						</a>
+
+
+						<!-- delete -->
+						<form action="{% url 'annotator:image-delete' img.id%}" method="post" style="display: inline;">
+							{% csrf_token %}
+							<input type="hidden" name="image_id" value="{{img.id}}">
+							<button type="submit" class="btn btn-default btn-sm">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</form>
+
+					</div>
+				{% endfor %}
+			{% else %}
+				<h3>Add images</h3>>
+			{% endif %}
+		</div>
+	</div>
 {% endblock %}

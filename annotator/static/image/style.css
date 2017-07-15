@@ -9,3 +9,13 @@ body{
 .navbar-brand{
 	font-family: 'Satisfy', cursive;
 }
+
+.img-container{
+	/*background: black;*/
+	margin: 1px;
+}
+
+img{
+	margin: 2px;
+	padding-bottom: 5px;
+}

@@ -5,7 +5,12 @@
 	{% if img %}
 		<div>
 			<label>Image: {{ img.id }}</label> <br/>
-			<img src="{{img.source}}" height="720px">
+			{% if img.source %}
+				<img src="{{img.source}}" height="720px">	
+			{% else %}
+				<img src="{{img.file.url}}" height="720px">
+			{% endif %}
+			
 			<ul>
 				{% for label in img.label_set.all %}
 					<li>{{ label.attribute.cat }} - {{ label.attribute.value }}</li>

@@ -5,17 +5,18 @@ from django.db import models
 
 
 class Image(models.Model):
-	source = models.CharField(max_length=1000)
+	source = models.CharField(max_length=1000, null=True, blank=True)
+	file = models.FileField(null=True, blank=True)
 
 	def get_absolute_url(self):
 		return reverse('annotator:details', kwargs={'pk':self.pk})
 
 	def __str__(self):
-		return  str(self.id)+ " " +self.source
+		return  str(self.id) + " " + self.source + " " + self.file
 
 
 class Category(models.Model):
-	name = models.CharField(max_length=256)
+	name = models.CharField(max_length=256, unique=True)
 
 	def __str__(self):
 		return self.name
