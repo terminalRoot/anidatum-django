@@ -1,48 +1,46 @@
 {% extends 'image/base.html' %}
-
-
+<!-- col-sm-offset-1 col-md-offset-1 col-lg-offset-1  -->
 {% block body %}
-	<div class="container-fluid ">
-		<div class="row">
+	<div class="container-fluid">
 			{% if imgs %}
 				{% for img in imgs %}
-					<div class="col-sm-4 col-md-3 col-lg-2 img-container">
-						<a href="{% url 'annotator:details' img.id %}">
-							{% load thumbnail %}
-							{% if img.source %}
-								<!-- <img src="{% thumbnail img.source 200x100 %}" height="" alt=""/> -->
-								<img src="{{img.source}}" height="240px" alt=""/>
-							{% else %}
-								<img src="{{img.file.url}}" height="240px" alt="" />
-							{% endif %}
-						</a>
-						<!-- annotations -->
-						<div>
-							{% for label in img.label_set.all %}
-								<label style="color: white;">{{label.attribute.cat}}</label>
-							{% endfor %}
+					<div class="col-sm-6 col-md-2 well-sm">
+						<div class="img-container">
+							<a href="{% url 'annotator:details' img.id %}">
+								{% if not img.source %}
+									<img src="{{img.source}}" height="240px" alt=""/>
+								{% else %}
+									<img src="{{img.file.url}}" height="213px" width="200px" alt="" style="padding-left: 5px;" class="" />
+								{% endif %}
+							</a>
+							<!-- annotations -->
+							<div class="caption">
+								{% for label in img.label_set.all %}
+									<label style="color: black;">{{label.attribute.cat}}</label>
+								{% endfor %}
+							</div>
+							<!-- Edit image source -->
+							<div class="img-option-edit" style="left: 0;">
+								<a href="{% url 'annotator:image-update' img.id%}">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+							</div>
+							<!-- delete -->
+							<div class="img-option-edit" style="right: 0;">
+								<form action="{% url 'annotator:image-delete' img.id%}" method="post" style="display: inline;">
+									{% csrf_token %}
+									<input type="hidden" name="image_id" value="{{img.id}}">
+									<button type="submit" class="btn btn-default btn-sm">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
+								</form>
+							</div>
 						</div>
-						<!-- Edit image source -->
-						<a href="{% url 'annotator:image-update' img.id%}">
-							<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
-						</a>
-
-
-						<!-- delete -->
-						<form action="{% url 'annotator:image-delete' img.id%}" method="post" style="display: inline;">
-							{% csrf_token %}
-							<input type="hidden" name="image_id" value="{{img.id}}">
-							<button type="submit" class="btn btn-default btn-sm">
-								<span class="glyphicon glyphicon-trash"></span>
-							</button>
-						</form>
-
 					</div>
 				{% endfor %}
 			{% else %}
 				<h3>Add images</h3>>
 			{% endif %}
-		</div>
 	</div>
 {% endblock %}
 

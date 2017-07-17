@@ -11,11 +11,29 @@ body{
 }
 
 .img-container{
-	/*background: black;*/
-	margin: 1px;
+	background: LightGray;BurlyWood;
+	position: relative;
 }
 
-img{
-	margin: 2px;
-	padding-bottom: 5px;
+.caption{
+	background: transparent;
+	background-color: white;
+	z-index: 1;
+	position: absolute;
+	opacity: 0.5;
+	bottom: 0%;
+	left: 0%;
+	width: 100%;
+	text-align: center;
+}
+
+.img-option-edit{
+	display: none;
+	position: absolute;
+	top: 0;
+	/*left: 0;*/
+}
+
+.img-container:hover .img-option-edit{
+	display: block;
 }

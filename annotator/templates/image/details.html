@@ -2,25 +2,35 @@
 {% block title %}Label{% endblock%}
 
 {% block body %}
+	<div class="container-fluid row" style="background-color: LightGray;">
 	{% if img %}
-		<div>
-			<label>Image: {{ img.id }}</label> <br/>
-			{% if img.source %}
-				<img src="{{img.source}}" height="720px">	
+		<div class="col-sm-1 col-md-6 col-lg-6 img-container">
+			<!-- <label>Image: {{ img.id }}</label> <br/> -->
+			{% if not img.source %}
+				<img src="{{img.source}}" class="img-responsive" height="720px" alt="{{img.file.url}}">	
 			{% else %}
-				<img src="{{img.file.url}}" height="720px">
+				<img src="{{img.file.url}}" class="img-responsive" height="720px">
 			{% endif %}
-			
+		</div>
+
+		<div class="col-sm-1 col-md-6 col-lg-4">
+		<!-- <div> -->
+			<h4>Labels:</h4>
 			<ul>
 				{% for label in img.label_set.all %}
-					<li>{{ label.attribute.cat }} - {{ label.attribute.value }}</li>
+					<li>{{ label.attribute.cat }} : {{ label.attribute.value }}</li>
 				{% endfor %}
 			</ul>
+
+			<a href="{% url 'annotator:index' %}">
+				<button class="btn btn-primary">Submit</button>
+			</a>
+
 		</div>
 	{% else %}
 		<label>Invalid image id</label>
 	{% endif %}
-
+	</div>
 {% endblock %}
 
 
