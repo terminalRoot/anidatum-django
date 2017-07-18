@@ -1,31 +1,30 @@
 {% extends 'image/base.html' %}
 {% block title %}Label{% endblock%}
 
+
 {% block body %}
-	<div class="container-fluid row" style="background-color: LightGray;">
+	<div class="container-fluid" style="display: flex;">
 	{% if img %}
-		<div class="col-sm-1 col-md-6 col-lg-6 img-container">
-			<!-- <label>Image: {{ img.id }}</label> <br/> -->
+		<div class="col-sm-offset-1 col-sm-1 col-md-6" style="position: relative; align-items: center; padding: 0px;">
 			{% if not img.source %}
-				<img src="{{img.source}}" class="img-responsive" height="720px" alt="{{img.file.url}}">	
+				<img src="{{img.source}}" class="" height="720px">	
 			{% else %}
-				<img src="{{img.file.url}}" class="img-responsive" height="720px">
+				<img src="{{img.file.url}}" class="" height="720px">
 			{% endif %}
 		</div>
 
-		<div class="col-sm-1 col-md-6 col-lg-4">
-		<!-- <div> -->
+		<div class="col-sm-1 col-md-6" style="">
 			<h4>Labels:</h4>
 			<ul>
 				{% for label in img.label_set.all %}
 					<li>{{ label.attribute.cat }} : {{ label.attribute.value }}</li>
 				{% endfor %}
 			</ul>
-
+			<label id="label"></label><br>
 			<a href="{% url 'annotator:index' %}">
 				<button class="btn btn-primary">Submit</button>
 			</a>
-
+			<button class="btn" onclick="drawCanvas(this.parentNode.parentNode);">Draw</button>
 		</div>
 	{% else %}
 		<label>Invalid image id</label>
