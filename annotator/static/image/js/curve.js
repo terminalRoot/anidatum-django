@@ -22,7 +22,7 @@ Curve.prototype.append = function(point) {
 };
 
 Curve.prototype.path = function() {
-	return this._path[0];
+	return this._path;
 };
 
 Curve.prototype.setCanvas = function(canvas) {
